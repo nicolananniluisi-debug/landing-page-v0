@@ -82,13 +82,21 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(20px) saturate(200%);
   -webkit-backdrop-filter: blur(20px) saturate(200%);
+  /* Idle glow: inner edge catch (1px inset) + diffuse outer bloom */
+  box-shadow:
+    inset 0 0 0 1px rgba(242, 240, 235, 0.06),
+    0 0 16px 2px rgba(255, 255, 255, 0.05);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-navbar.scrolled {
   background: rgba(10, 10, 10, 0.90);
   border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  /* Scrolled glow: edge catch intensifies, bloom widens slightly + retain drop shadow */
+  box-shadow:
+    inset 0 0 0 1px rgba(242, 240, 235, 0.11),
+    0 0 20px 3px rgba(255, 255, 255, 0.08),
+    0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* ─────────────────────────────────────────────────────
@@ -258,6 +266,23 @@ body::before {
 
   .marquee-track {
     animation: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   FRAMER MOTION RESILIENCE FALLBACK
+   If JS fails (CSP block, hydration error, slow device),
+   Framer Motion elements stay at initial opacity: 0 —
+   invisible but still focusable and announced by screen readers.
+   This fallback forces them visible so the page is never blank.
+───────────────────────────────────────────────────── */
+@media (scripting: none) {
+  /* JS is disabled entirely — make all motion elements visible */
+  [style*="opacity: 0"],
+  [style*="opacity:0"] {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
 

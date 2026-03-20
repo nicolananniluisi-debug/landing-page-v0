@@ -22,6 +22,7 @@ const config: Config = {
         xs: '4px',
       },
       animation: {
+        'spotlight': 'spotlight 2.5s ease 0.5s 1 forwards',
         'bg-drift': 'bg-drift 18s ease-in-out infinite alternate',
         'fade-up': 'fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'fade-in': 'fade-in 0.4s ease-out forwards',
@@ -67,6 +68,11 @@ const config: Config = {
         'draw-line': {
           '0%': { strokeDashoffset: '500' },
           '100%': { strokeDashoffset: '0' },
+        },
+        'spotlight': {
+          '0%':   { opacity: '0', transform: 'translate(-72%, -62%) skewX(-30deg)' },
+          '35%':  { opacity: '1', transform: 'translate(-50%, -40%) skewX(-30deg)' },
+          '100%': { opacity: '0', transform: 'translate(-50%, -40%) skewX(-30deg)' },
         },
       },
       screens: {

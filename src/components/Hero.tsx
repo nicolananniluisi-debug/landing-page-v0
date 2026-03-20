@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { Star, ArrowDown, Zap } from 'lucide-react'
+import { Spotlight } from '@/components/ui/spotlight'
+import { WavyBackground } from '@/components/ui/wavy-background'
 
-const HEADLINE_WORDS = ['Crie', 'um', 'mês', 'de', 'conteúdo', 'sem', 'travar', 'a', 'tela.']
 
 const AVATARS = [
   { initials: 'LM', bg: 'rgba(255,255,255,0.12)' },
@@ -59,6 +60,11 @@ const PLATFORM_LOGOS = [
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
+  // SECURITY: ctaVisible gates tabIndex on both CTA buttons so they are excluded
+  // from the tab order while the wrapper motion.div is invisible (opacity 0).
+  // Fixes WCAG 2.1 SC 2.4.7 — focus must not be invisible.
+  // Ref: pentest-analyst finding — invisible-focusable CTA race condition.
+  const [ctaVisible, setCtaVisible] = useState(false)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
@@ -66,19 +72,29 @@ export default function Hero() {
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20 })
 
   useEffect(() => {
+    let rafPending = false
     const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return
-      const rect = containerRef.current.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-      mouseX.set(((e.clientX - centerX) / rect.width) * 10)
-      mouseY.set(((e.clientY - centerY) / rect.height) * 10)
+      if (rafPending || !containerRef.current) return
+      rafPending = true
+      requestAnimationFrame(() => {
+        rafPending = false
+        if (!containerRef.current) return
+        const rect = containerRef.current.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        mouseX.set(((e.clientX - centerX) / rect.width) * 10)
+        mouseY.set(((e.clientY - centerY) / rect.height) * 10)
+      })
     }
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [mouseX, mouseY])
 
-  const scrollToSection = (id: string) => {
+  // Allowlist guard — never derive these ids from URL params or user input.
+  const VALID_SECTION_IDS = ['pricing', 'how-it-works'] as const
+  type SectionId = typeof VALID_SECTION_IDS[number]
+  const scrollToSection = (id: SectionId) => {
+    if (!VALID_SECTION_IDS.includes(id)) return
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -89,6 +105,33 @@ export default function Hero() {
       style={{ minHeight: '100dvh', paddingTop: '56px' }}
       aria-label="Hero section"
     >
+      {/* Wavy Background — design-system off-white tones on #0a0a0a */}
+      <WavyBackground
+        containerClassName="absolute inset-0 pointer-events-none"
+        colors={[
+          'rgba(242, 240, 235, 0.18)',
+          'rgba(255, 255, 255, 0.10)',
+          'rgba(242, 240, 235, 0.08)',
+          'rgba(255, 255, 255, 0.06)',
+          'rgba(242, 240, 235, 0.13)',
+        ]}
+        backgroundFill="#0a0a0a"
+        waveOpacity={0.55}
+        waveWidth={60}
+        blur={12}
+        speed="slow"
+      />
+
+      {/* Spotlight */}
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
+      <Spotlight
+        className="-top-40 right-0 md:right-60 md:-top-20 scale-x-[-1]"
+        fill="white"
+      />
+
       {/* Parallax radial glow */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -127,26 +170,38 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Headline — word stagger */}
+        {/* Headline — 2 linhas fixas */}
         <h1
-          className="text-display font-bold mb-6"
-          style={{ color: 'var(--text-primary)', maxWidth: '760px', margin: '0 auto 1.5rem' }}
+          style={{
+            color: 'var(--text-primary)',
+            maxWidth: '680px',
+            margin: '0 auto 1.5rem',
+            textAlign: 'center',
+            fontSize: 'clamp(2rem, 4.5vw, 3.75rem)',
+            fontWeight: 700,
+            lineHeight: 1.15,
+            letterSpacing: '-0.02em',
+          }}
         >
-          {HEADLINE_WORDS.map((word, i) => (
-            <motion.span
-              key={i}
-              className="inline-block mr-[0.25em]"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.2 + i * 0.06,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              {word}
-            </motion.span>
-          ))}
+          {/* Linha 1 */}
+          <motion.span
+            className="block"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Crie um mês de conteúdo
+          </motion.span>
+
+          {/* Linha 2 */}
+          <motion.span
+            className="block"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+          >
+            sem travar a criatividade.
+          </motion.span>
         </h1>
 
         {/* Subheadline */}
@@ -171,11 +226,16 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          onAnimationComplete={() => setCtaVisible(true)}
         >
+          {/* SECURITY: tabIndex is -1 until the wrapper animation completes.
+              Prevents focus landing on an invisible button (WCAG 2.1 SC 2.4.7).
+              Ref: pentest-analyst finding — invisible-focusable CTA race condition. */}
           <button
             className="btn-primary btn-glow"
             onClick={() => scrollToSection('pricing')}
             aria-label="Começar agora, grátis"
+            tabIndex={ctaVisible ? 0 : -1}
           >
             <Zap size={16} strokeWidth={1.5} />
             Começar agora — grátis
@@ -184,6 +244,7 @@ export default function Hero() {
             className="btn-ghost"
             onClick={() => scrollToSection('how-it-works')}
             aria-label="Ver como funciona"
+            tabIndex={ctaVisible ? 0 : -1}
           >
             Ver como funciona
             <ArrowDown size={16} strokeWidth={1.5} />

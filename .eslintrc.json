@@ -1,0 +1,13 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "react/no-danger": "error",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "AssignmentExpression[left.property.name='innerHTML']",
+        "message": "Direct innerHTML assignment is forbidden. Use textContent to prevent XSS. See gooey-text-morphing.tsx for context."
+      }
+    ]
+  }
+}
