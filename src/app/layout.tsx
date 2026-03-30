@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { headers } from 'next/headers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'ContentAI — Seu próximo mês de conteúdo, pronto em 10 minutos',
+  title: 'flowo — Seu próximo mês de conteúdo, pronto em 10 minutos',
   description:
     'Crie roteiros, legendas e vídeos para Instagram, TikTok e YouTube com IA. Mais de 5.000 criadores ativos. Comece grátis por 7 dias.',
   keywords: [
@@ -16,14 +15,14 @@ export const metadata: Metadata = {
     'conteúdo para criadores',
   ],
   openGraph: {
-    title: 'ContentAI — Seu próximo mês de conteúdo, pronto em 10 minutos',
+    title: 'flowo — Seu próximo mês de conteúdo, pronto em 10 minutos',
     description: 'Crie roteiros, legendas e vídeos com IA. Sem complicação.',
     type: 'website',
     locale: 'pt_BR',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ContentAI — Conteúdo com IA para criadores',
+    title: 'flowo — Conteúdo com IA para criadores',
     description: 'Crie roteiros, legendas e vídeos com IA. Sem complicação.',
   },
   robots: {
@@ -37,8 +36,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const nonce = headers().get('x-nonce') ?? undefined
-
   return (
     <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>{children}</body>

@@ -3,36 +3,22 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-function LogoIcon() {
+function FlowoWordmark() {
   return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
+    <span
+      style={{
+        fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
+        fontSize: '15px',
+        fontWeight: 300,
+        letterSpacing: '0.10em',
+        color: 'rgba(242, 240, 235, 0.25)',
+        transition: 'color 0.2s ease',
+        userSelect: 'none',
+      }}
+      className="flowo-wordmark"
     >
-      <rect
-        x="1"
-        y="1"
-        width="26"
-        height="26"
-        rx="7"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeOpacity="0.8"
-      />
-      <path
-        d="M9 14h4m0 0l-2-3m2 3l-2 3M15 10l2 4-2 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeOpacity="0.9"
-      />
-      <circle cx="20" cy="9" r="2" fill="currentColor" fillOpacity="0.7" />
-    </svg>
+      flowo
+    </span>
   )
 }
 
@@ -101,11 +87,18 @@ export default function Navbar() {
         {/* Center — Logo */}
         <button
           onClick={scrollToTop}
-          className="cursor-pointer transition-opacity duration-200 hover:opacity-70 flex items-center justify-center"
-          style={{ color: 'var(--text-primary)' }}
+          className="cursor-pointer flex items-center justify-center flowo-wordmark-btn"
           aria-label="Voltar ao topo"
+          onMouseEnter={(e) => {
+            const span = (e.currentTarget as HTMLElement).querySelector('.flowo-wordmark') as HTMLElement | null
+            if (span) span.style.color = 'rgba(242, 240, 235, 0.55)'
+          }}
+          onMouseLeave={(e) => {
+            const span = (e.currentTarget as HTMLElement).querySelector('.flowo-wordmark') as HTMLElement | null
+            if (span) span.style.color = 'rgba(242, 240, 235, 0.25)'
+          }}
         >
-          <LogoIcon />
+          <FlowoWordmark />
         </button>
 
         {/* Right — CTA */}

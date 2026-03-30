@@ -2,26 +2,20 @@
 
 import { Github, Twitter, Instagram } from 'lucide-react'
 
-function LogoMark() {
+function FlowoWordmark() {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
+    <span
+      style={{
+        fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
+        fontSize: '14px',
+        fontWeight: 300,
+        letterSpacing: '0.10em',
+        color: 'rgba(242, 240, 235, 0.25)',
+        userSelect: 'none',
+      }}
     >
-      <rect
-        x="1" y="1" width="26" height="26" rx="7"
-        stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5"
-      />
-      <path
-        d="M9 14h4m0 0l-2-3m2 3l-2 3M15 10l2 4-2 4"
-        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" strokeOpacity="0.6"
-      />
-      <circle cx="20" cy="9" r="2" fill="currentColor" fillOpacity="0.4" />
-    </svg>
+      flowo
+    </span>
   )
 }
 
@@ -51,20 +45,8 @@ export default function Footer() {
         {/* Top row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-10">
           {/* Logo + tagline */}
-          <div className="flex items-center gap-3">
-            <span style={{ color: 'var(--text-tertiary)' }}>
-              <LogoMark />
-            </span>
-            <span
-              style={{
-                fontSize: '14px',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
-                letterSpacing: '-0.01em',
-              }}
-            >
-              ContentAI
-            </span>
+          <div className="flex items-center">
+            <FlowoWordmark />
           </div>
 
           {/* Social */}
@@ -90,7 +72,7 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>
-            &copy; {new Date().getFullYear()} ContentAI. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} flowo. Todos os direitos reservados.
           </p>
 
           <nav aria-label="Links legais" className="flex items-center gap-6">
