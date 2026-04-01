@@ -3,18 +3,34 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────
-   DESIGN TOKENS — Dark Glassmorphism System
+   DESIGN TOKENS — Flowo Brand System v2.0
+   Referência: flowo_brandbook_v7.pdf
 ───────────────────────────────────────────────────── */
 :root {
-  --bg-base: #0a0a0a;
-  --bg-surface: rgba(255, 255, 255, 0.04);
-  --bg-surface-hover: rgba(255, 255, 255, 0.07);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.14);
-  --text-primary: #F2F0EB;
-  --text-secondary: rgba(242, 240, 235, 0.55);
-  --text-tertiary: rgba(242, 240, 235, 0.30);
-  --accent: #E8E4DC;
+  /* Backgrounds */
+  --bg-base:          #0F0F0F;
+  --bg-surface:       rgba(30, 26, 26, 0.55);
+  --bg-surface-hover: rgba(30, 26, 26, 0.80);
+  --bg-elevated:      #1E1A1A;
+
+  /* Borders — warm coral-tinted */
+  --border-subtle:    rgba(255, 180, 150, 0.08);
+  --border-medium:    rgba(255, 180, 150, 0.14);
+  --border-strong:    rgba(255, 180, 150, 0.24);
+
+  /* Text */
+  --text-primary:   #FFEBE6;
+  --text-secondary: rgba(255, 235, 230, 0.55);
+  --text-tertiary:  rgba(255, 235, 230, 0.30);
+
+  /* Brand coral scale */
+  --coral-deep:   #4A0F00;   /* CTA principal */
+  --coral-mid:    #851D00;   /* secundário / highlight */
+  --coral-burnt:  #C23010;   /* hover / tags / categorias */
+  --coral-vivid:  #FF6030;   /* destaque máximo */
+
+  /* Divider */
+  --divider: #2A2420;
 }
 
 /* ─────────────────────────────────────────────────────
@@ -35,13 +51,13 @@ html {
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-pt-sans-caption), system-ui, sans-serif;
   overflow-x: hidden;
   position: relative;
 }
 
 /* ─────────────────────────────────────────────────────
-   ANIMATED BACKGROUND — CSS Gradient Mesh
+   ANIMATED BACKGROUND — Warm Coral Glow
 ───────────────────────────────────────────────────── */
 body::before {
   content: '';
@@ -49,8 +65,8 @@ body::before {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(255, 255, 255, 0.025) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(255, 255, 255, 0.018) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(194, 48, 16, 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 80% at 80% 70%, rgba(74, 15, 0, 0.06)  0%, transparent 65%);
   animation: bg-drift 18s ease-in-out infinite alternate;
   pointer-events: none;
 }
@@ -67,8 +83,8 @@ body::before {
 .glass {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -78,54 +94,63 @@ body::before {
 }
 
 .glass-navbar {
-  background: rgba(10, 10, 10, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(20px) saturate(200%);
-  -webkit-backdrop-filter: blur(20px) saturate(200%);
-  /* Idle glow: inner edge catch (1px inset) + diffuse outer bloom */
+  background: rgba(15, 15, 15, 0.72);
+  border: 1px solid rgba(255, 180, 150, 0.10);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
-    inset 0 0 0 1px rgba(242, 240, 235, 0.06),
-    0 0 16px 2px rgba(255, 255, 255, 0.05);
+    inset 0 0 0 1px rgba(255, 235, 230, 0.05),
+    0 0 16px 2px rgba(194, 48, 16, 0.04);
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass-navbar.scrolled {
-  background: rgba(10, 10, 10, 0.90);
-  border-color: rgba(255, 255, 255, 0.16);
-  /* Scrolled glow: edge catch intensifies, bloom widens slightly + retain drop shadow */
+  background: rgba(15, 15, 15, 0.90);
+  border-color: rgba(255, 180, 150, 0.16);
   box-shadow:
-    inset 0 0 0 1px rgba(242, 240, 235, 0.11),
-    0 0 20px 3px rgba(255, 255, 255, 0.08),
-    0 4px 24px rgba(0, 0, 0, 0.4);
+    inset 0 0 0 1px rgba(255, 235, 230, 0.08),
+    0 0 20px 3px rgba(194, 48, 16, 0.06),
+    0 4px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ─────────────────────────────────────────────────────
-   TYPOGRAPHY SCALE — Fluid with clamp()
+   TYPOGRAPHY SCALE
+   Headings: PT Sans (Bold)
+   Body: PT Sans Caption (Regular)
 ───────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
+  font-weight: 700;
+}
+
 .text-display {
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
   font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   font-weight: 700;
 }
 
 .text-h2 {
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
   font-size: clamp(1.75rem, 3vw, 3rem);
   line-height: 1.15;
-  letter-spacing: -0.02em;
-  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-weight: 700;
 }
 
 .text-h3 {
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
   font-size: clamp(1.25rem, 2vw, 1.75rem);
   line-height: 1.2;
-  letter-spacing: -0.01em;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .text-body {
+  font-family: var(--font-pt-sans-caption), system-ui, sans-serif;
   font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
   line-height: 1.65;
+  font-weight: 400;
 }
 
 /* ─────────────────────────────────────────────────────
@@ -135,21 +160,22 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--text-primary);
-  color: var(--bg-base);
+  background: var(--coral-burnt);
+  color: var(--text-primary);
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 12px 24px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  background: var(--coral-vivid);
   transform: translateY(-1px);
 }
 
@@ -157,13 +183,14 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(30, 26, 26, 0.40);
   color: var(--text-primary);
+  font-family: var(--font-pt-sans), system-ui, sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   padding: 12px 24px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--border-medium);
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
   text-decoration: none;
@@ -173,8 +200,8 @@ body::before {
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(30, 26, 26, 0.70);
+  border-color: var(--border-strong);
 }
 
 .btn-ghost-sm {
@@ -189,8 +216,9 @@ body::before {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font-family: var(--font-pt-sans-caption), system-ui, sans-serif;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-secondary);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -243,11 +271,41 @@ body::before {
 }
 
 /* ─────────────────────────────────────────────────────
-   DOT GRID BACKGROUND
+   GRAPHIC PATTERNS (Brandbook p.11)
+   Sempre usar com baixa opacidade (5–25%)
 ───────────────────────────────────────────────────── */
+
+/* 01 · Dot Grid — precisão e sistema */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(194, 48, 16, 0.12) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* 02 · Flow Lines — movimento e fluidez */
+.flow-lines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(194, 48, 16, 0.06) 28px,
+    rgba(194, 48, 16, 0.06) 29px
+  );
+}
+
+/* 03 · Glow Circles — profundidade e foco (usar via radial-gradient inline) */
+.glow-circle {
+  background: radial-gradient(circle 240px at 50% 50%, rgba(194, 48, 16, 0.12) 0%, transparent 70%);
+}
+
+/* 04 · Scan Lines — tech e precisão */
+.scan-lines {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 6px,
+    rgba(194, 48, 16, 0.04) 6px,
+    rgba(194, 48, 16, 0.04) 7px
+  );
 }
 
 /* ─────────────────────────────────────────────────────
@@ -271,13 +329,8 @@ body::before {
 
 /* ─────────────────────────────────────────────────────
    FRAMER MOTION RESILIENCE FALLBACK
-   If JS fails (CSP block, hydration error, slow device),
-   Framer Motion elements stay at initial opacity: 0 —
-   invisible but still focusable and announced by screen readers.
-   This fallback forces them visible so the page is never blank.
 ───────────────────────────────────────────────────── */
 @media (scripting: none) {
-  /* JS is disabled entirely — make all motion elements visible */
   [style*="opacity: 0"],
   [style*="opacity:0"] {
     opacity: 1 !important;
@@ -289,25 +342,21 @@ body::before {
 /* ─────────────────────────────────────────────────────
    SCROLLBAR
 ───────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.12);
+  background: rgba(194, 48, 16, 0.20);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.20);
+  background: rgba(194, 48, 16, 0.35);
 }
 
 /* ─────────────────────────────────────────────────────
-   FOCUS STATES — Accessibility
+   FOCUS STATES
 ───────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid rgba(242, 240, 235, 0.5);
+  outline: 2px solid rgba(194, 48, 16, 0.60);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -317,22 +366,27 @@ body::before {
 ───────────────────────────────────────────────────── */
 .pricing-featured {
   transform: scale(1.03);
-  border-color: rgba(255, 255, 255, 0.22) !important;
-  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: var(--border-strong) !important;
+  background: rgba(30, 26, 26, 0.70) !important;
 }
 
 /* ─────────────────────────────────────────────────────
-   CTA BUTTON GLOW PULSE
+   CTA GLOW PULSE — coral
 ───────────────────────────────────────────────────── */
 .btn-glow {
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
 @keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(242, 240, 235, 0);
-  }
-  50% {
-    box-shadow: 0 0 20px 4px rgba(242, 240, 235, 0.08);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(194, 48, 16, 0); }
+  50%       { box-shadow: 0 0 20px 6px rgba(194, 48, 16, 0.25); }
+}
+
+/* ─────────────────────────────────────────────────────
+   CORAL ACCENT DIVIDER
+───────────────────────────────────────────────────── */
+.divider-coral {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--coral-burnt), transparent);
+  opacity: 0.30;
 }

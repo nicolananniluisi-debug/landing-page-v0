@@ -7,17 +7,21 @@ function FlowoWordmark() {
   return (
     <span
       style={{
-        fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
-        fontSize: '15px',
-        fontWeight: 300,
-        letterSpacing: '0.10em',
-        color: 'rgba(242, 240, 235, 0.25)',
+        fontFamily: 'var(--font-pt-sans), system-ui, sans-serif',
+        fontSize: '16px',
+        fontWeight: 700,
+        letterSpacing: '0.02em',
+        color: '#FFEBE6',
         transition: 'color 0.2s ease',
         userSelect: 'none',
+        display: 'inline-flex',
+        alignItems: 'baseline',
+        gap: '1px',
       }}
       className="flowo-wordmark"
     >
       flowo
+      <span style={{ color: '#C23010', fontSize: '20px', lineHeight: 1 }}>•</span>
     </span>
   )
 }
@@ -59,7 +63,7 @@ export default function Navbar() {
           <button
             onClick={() => scrollToSection('pricing')}
             className="text-sm font-normal cursor-pointer transition-colors duration-150"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-pt-sans-caption)' }}
             onMouseEnter={(e) =>
               ((e.target as HTMLElement).style.color = 'var(--text-primary)')
             }
@@ -72,7 +76,7 @@ export default function Navbar() {
           <button
             onClick={() => scrollToSection('faq')}
             className="text-sm font-normal cursor-pointer transition-colors duration-150"
-            style={{ color: 'var(--text-secondary)' }}
+            style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-pt-sans-caption)' }}
             onMouseEnter={(e) =>
               ((e.target as HTMLElement).style.color = 'var(--text-primary)')
             }
@@ -91,11 +95,11 @@ export default function Navbar() {
           aria-label="Voltar ao topo"
           onMouseEnter={(e) => {
             const span = (e.currentTarget as HTMLElement).querySelector('.flowo-wordmark') as HTMLElement | null
-            if (span) span.style.color = 'rgba(242, 240, 235, 0.55)'
+            if (span) span.style.color = '#FFEBE6'
           }}
           onMouseLeave={(e) => {
             const span = (e.currentTarget as HTMLElement).querySelector('.flowo-wordmark') as HTMLElement | null
-            if (span) span.style.color = 'rgba(242, 240, 235, 0.25)'
+            if (span) span.style.color = '#FFEBE6'
           }}
         >
           <FlowoWordmark />
@@ -105,7 +109,7 @@ export default function Navbar() {
         <div className="flex justify-end">
           <button
             onClick={() => scrollToSection('pricing')}
-            className="btn-ghost btn-ghost-sm cursor-pointer"
+            className="btn-primary btn-ghost-sm cursor-pointer"
             style={{ borderRadius: '9999px' }}
             aria-label="Começar grátis"
           >

@@ -1,7 +1,21 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { PT_Sans, PT_Sans_Caption } from 'next/font/google'
 import './globals.css'
+
+const ptSans = PT_Sans({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  variable: '--font-pt-sans',
+  display: 'swap',
+})
+
+const ptSansCaption = PT_Sans_Caption({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-pt-sans-caption',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'flowo — Seu próximo mês de conteúdo, pronto em 10 minutos',
@@ -37,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="pt-BR" className={`${ptSans.variable} ${ptSansCaption.variable}`}>
       <body>{children}</body>
     </html>
   )

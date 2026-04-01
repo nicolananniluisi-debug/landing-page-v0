@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowo — Logo Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #050507;
+      color: #f2f0eb;
+      min-height: 100vh;
+      padding: 48px 40px;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(242, 240, 235, 0.35);
+      margin-bottom: 24px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      min-width: 200px;
+    }
+
+    .card.light {
+      background: #f5f5f0;
+      border-color: rgba(0,0,0,0.08);
+    }
+
+    .card.indigo-bg {
+      background: #6e56cf;
+      border-color: transparent;
+    }
+
+    /* ── Logo SVG base ── */
+    .logo-svg {
+      display: block;
+      overflow: visible;
+    }
+
+    /* ── Label ── */
+    .label {
+      font-size: 11px;
+      color: rgba(242,240,235,0.30);
+      margin-top: 10px;
+      text-align: center;
+      letter-spacing: 0.04em;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Favicon mockup */
+    .favicon-wrap {
+      width: 32px;
+      height: 32px;
+      background: #6e56cf;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 48px 0;
+    }
+
+    /* comparison strip */
+    .strip {
+      display: flex;
+      gap: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .strip-item {
+      flex: 1;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .strip-item:last-child { border-right: none; }
+    .strip-label {
+      font-size: 10px;
+      color: rgba(242,240,235,0.28);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- SECTION 1: Primary Direction — Double-O Ligature -->
+  <!-- ───────────────────────────────────────────── -->
+  <div class="section">
+    <h2>Direção Primária — Double-O Ligature</h2>
+    <div class="row">
+
+      <!-- Large / hero size -->
+      <div class="item">
+        <div class="card">
+          <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flowo">
+            <text
+              x="0" y="30"
+              font-family="'Inter', system-ui, sans-serif"
+              font-weight="400"
+              font-size="32"
+              letter-spacing="3.84"
+              fill="rgba(242,240,235,0.88)"
+            >flowo</text>
+            <!-- Ligature bridge between the two o's -->
+            <!-- At 32px Inter 400, letter-spacing 3.84px (~0.12em):
+                 'f'=~16px, 'l'=~8px, 'o'=~20px, 'w'=~26px, 'o'=~20px
+                 First 'o' center-x ≈ 16+3.84 + 8+3.84 + 10 = ~42px
+                 Second 'o' center-x ≈ 42 + 20+3.84 + 26+3.84 + 10 = ~106px
+                 Mid x-height at 32px Inter ≈ y=17 (mid of 'o' counter) -->
+            <line x1="95" y1="17" x2="158" y2="17"
+              stroke="#6e56cf" stroke-width="0.9" stroke-opacity="0.75" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label">Hero / 32px · dark</div>
+      </div>
+
+      <!-- Medium / navbar size -->
+      <div class="item">
+        <div class="card">
+          <svg class="logo-svg" width="90" height="22" viewBox="0 0 90 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flowo">
+            <text
+              x="0" y="16"
+              font-family="'Inter', system-ui, sans-serif"
+              font-weight="400"
+              font-size="16"
+              letter-spacing="1.92"
+              fill="rgba(242,240,235,0.88)"
+            >flowo</text>
+            <line x1="47" y1="9" x2="78" y2="9"
+              stroke="#6e56cf" stroke-width="0.9" stroke-opacity="0.75" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label">Navbar / 16px · dark</div>
+      </div>
+
+      <!-- Light background -->
+      <div class="item">
+        <div class="card light">
+          <svg class="logo-svg" width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Flowo">
+            <text
+              x="0" y="30"
+              font-family="'Inter', system-ui, sans-serif"
+              font-weight="400"
+              font-size="32"
+              letter-spacing="3.84"
+              fill="rgba(10,10,15,0.85)"
+            >flowo</text>
+            <line x1="95" y1="17" x2="158" y2="17"
+              stroke="#6e56cf" stroke-width="0.9" stroke-opacity="0.9" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label">32px · light surface</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- SECTION 2: Favicon / App Icon -->
+  <!-- ───────────────────────────────────────────── -->
+  <div class="section">
+    <h2>Favicon & App Icon</h2>
+    <div class="row">
+
+      <!-- 32px favicon mockup -->
+      <div class="item">
+        <div class="favicon-wrap">
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="11"
+              font-family="'Inter', system-ui"
+              font-weight="400"
+              font-size="12"
+              letter-spacing="0.5"
+              fill="rgba(242,240,235,0.95)"
+            >fw</text>
+          </svg>
+        </div>
+        <div class="label">Favicon 32px</div>
+      </div>
+
+      <!-- 64px app icon -->
+      <div class="item">
+        <div style="width:64px;height:64px;background:#6e56cf;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+          <svg width="40" height="26" viewBox="0 0 40 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="20"
+              font-family="'Inter', system-ui"
+              font-weight="400"
+              font-size="22"
+              letter-spacing="1"
+              fill="rgba(242,240,235,0.95)"
+            >fw</text>
+          </svg>
+        </div>
+        <div class="label">App icon 64px</div>
+      </div>
+
+      <!-- 512px simulation (scaled down) -->
+      <div class="item">
+        <div style="width:96px;height:96px;background:#6e56cf;border-radius:20px;display:flex;align-items:center;justify-content:center;">
+          <svg width="62" height="38" viewBox="0 0 62 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="28"
+              font-family="'Inter', system-ui"
+              font-weight="400"
+              font-size="32"
+              letter-spacing="1.5"
+              fill="rgba(242,240,235,0.95)"
+            >fw</text>
+            <!-- ligature visible at this size -->
+            <line x1="25" y1="15" x2="55" y2="15"
+              stroke="rgba(242,240,235,0.5)" stroke-width="0.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label">App icon 96px</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- SECTION 3: Scale comparison -->
+  <!-- ───────────────────────────────────────────── -->
+  <div class="section">
+    <h2>Comportamento por Escala</h2>
+    <div class="strip">
+
+      <div class="strip-item">
+        <svg width="120" height="28" viewBox="0 0 120 28" fill="none">
+          <text x="0" y="20" font-family="'Inter',system-ui" font-weight="400"
+            font-size="20" letter-spacing="2.4" fill="rgba(242,240,235,0.88)">flowo</text>
+          <line x1="60" y1="11" x2="100" y2="11"
+            stroke="#6e56cf" stroke-width="0.9" stroke-opacity="0.75" stroke-linecap="round"/>
+        </svg>
+        <div class="strip-label">20px — hero</div>
+      </div>
+
+      <div class="strip-item">
+        <svg width="84" height="22" viewBox="0 0 84 22" fill="none">
+          <text x="0" y="16" font-family="'Inter',system-ui" font-weight="400"
+            font-size="15" letter-spacing="1.8" fill="rgba(242,240,235,0.88)">flowo</text>
+          <line x1="45" y1="8.5" x2="73" y2="8.5"
+            stroke="#6e56cf" stroke-width="0.85" stroke-opacity="0.75" stroke-linecap="round"/>
+        </svg>
+        <div class="strip-label">15px — navbar</div>
+      </div>
+
+      <div class="strip-item">
+        <svg width="70" height="18" viewBox="0 0 70 18" fill="none">
+          <text x="0" y="13" font-family="'Inter',system-ui" font-weight="400"
+            font-size="12" letter-spacing="1.44" fill="rgba(242,240,235,0.88)">flowo</text>
+          <!-- ligature suppressed below 18px -->
+        </svg>
+        <div class="strip-label">12px — sem ligature</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- SECTION 4: Alternativa — Tracked-Out Wordmark -->
+  <!-- ───────────────────────────────────────────── -->
+  <div class="section">
+    <h2>Alternativa — Tracked-Out Wordmark (sem ligature)</h2>
+    <div class="row">
+      <div class="item">
+        <div class="card">
+          <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
+            <text x="0" y="30" font-family="'Inter',system-ui" font-weight="300"
+              font-size="32" letter-spacing="5.76" fill="rgba(242,240,235,0.80)">flowo</text>
+          </svg>
+        </div>
+        <div class="label">Geist Light 300 · tracking 0.18em · opacity 80%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- SECTION 5: Alternativa — Throughline Symbol -->
+  <!-- ───────────────────────────────────────────── -->
+  <div class="section">
+    <h2>Alternativa — Throughline (símbolo standalone)</h2>
+    <div class="row">
+
+      <div class="item">
+        <div class="card">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <defs>
+              <linearGradient id="tl-grad" x1="0" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#6e56cf"/>
+              </linearGradient>
+            </defs>
+            <!-- 270° arc: start at left (180°), sweep 270° clockwise, end at bottom -->
+            <path
+              d="M 8 24 A 16 16 0 1 1 24 40"
+              stroke="url(#tl-grad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="label">Symbol standalone · 48px</div>
+      </div>
+
+      <div class="item">
+        <div class="card">
+          <svg width="200" height="40" viewBox="0 0 200 40" fill="none">
+            <defs>
+              <linearGradient id="tl-grad2" x1="0" y1="0" x2="28" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#6e56cf"/>
+              </linearGradient>
+            </defs>
+            <path
+              d="M 4 20 A 10 10 0 1 1 14 30"
+              stroke="url(#tl-grad2)" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <text x="34" y="27" font-family="'Inter',system-ui" font-weight="400"
+              font-size="22" letter-spacing="2.64" fill="rgba(242,240,235,0.88)">flowo</text>
+          </svg>
+        </div>
+        <div class="label">Symbol + wordmark</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────────────── -->
+  <!-- Note -->
+  <!-- ───────────────────────────────────────────── -->
+  <div style="margin-top: 32px; padding: 16px 20px; border-radius: 8px; background: rgba(110,86,207,0.08); border: 1px solid rgba(110,86,207,0.2);">
+    <p style="font-size: 12px; color: rgba(242,240,235,0.45); line-height: 1.6;">
+      Preview usando Inter como proxy de Geist. As métricas tipográficas variam ligeiramente — o componente final deve usar Geist carregado via <code style="color: rgba(110,86,207,0.9)">next/font</code>. A posição exata da ligature deve ser ajustada após medir as métricas reais do Geist 400 em 24px.
+    </p>
+  </div>
+
+</body>
+</html>
